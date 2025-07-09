@@ -7,6 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Cocktails() {
   useGSAP(() => {
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
     const parallaxTl = gsap.timeline({
       scrollTrigger: {
         trigger: "#cocktails",
@@ -15,6 +16,7 @@ export default function Cocktails() {
         scrub: true,
       },
     });
+
     const textTl = gsap.timeline({
       scrollTrigger: {
         trigger: ".list",
@@ -35,8 +37,7 @@ export default function Cocktails() {
         duration: 1,
         stagger: 0.7,
         ease: "power1.inOut",
-      },
-      0
+      }
     );
     textTl.fromTo(
       ".loved li",
@@ -51,10 +52,9 @@ export default function Cocktails() {
         stagger: 0.7,
         ease: "power1.inOut",
       },
-      0
+      isMobile ? ">0" : 0
     );
     parallaxTl
-
       .from("#c-left-leaf", {
         x: -100,
         y: 100,
